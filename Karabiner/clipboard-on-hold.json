@@ -1,0 +1,26 @@
+{
+  "title": "Clipboard Manager — Show on F6 hold",
+  "rules": [
+    {
+      "description": "Hold F6 to show Clipboard Manager overlay (clipboardmanager://show)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f6",
+            "modifiers": { "optional": ["any"] }
+          },
+          "parameters": {
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          },
+          "to_if_alone": [
+            { "key_code": "f6" }
+          ],
+          "to_if_held_down": [
+            { "shell_command": "open 'clipboardmanager://show'" }
+          ]
+        }
+      ]
+    }
+  ]
+}
