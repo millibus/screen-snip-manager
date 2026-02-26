@@ -4,7 +4,7 @@ Menu bar app that keeps a searchable history of clipboard items: text and images
 
 ## Project status
 
-Early public release (v0.1 MVP). Core workflows are functional and covered by starter unit tests.
+v1.0. Core workflows are functional and covered by unit tests.
 
 ## Features
 
@@ -34,11 +34,14 @@ The app runs as a menu bar item (clipboard icon). It does not appear in the Dock
 xcodebuild test -project "ClipboardManager.xcodeproj" -scheme "ClipboardManager" -destination "platform=macOS"
 ```
 
-## Installation (distribution)
+## Distribution
 
-1. In Xcode, choose **Product → Archive**.
-2. Distribute the archive (e.g. **Distribute App** → Copy App) and place **Clipboard Manager.app** in `/Applications` or elsewhere.
-3. For code signing: use **Signing & Capabilities** in the target to set your Team and enable **Sign to Run Locally** or full signing for distribution outside the Mac App Store.
+To ship a build for others (e.g. GitHub Releases or direct download):
+
+1. **Archive**: In Xcode, choose **Product → Archive**.
+2. **Code signing**: In the **ClipboardManager** target, open **Signing & Capabilities** and set your **Team**. Use "Sign to Run Locally" for local installs, or full signing for distribution. The project uses automatic signing; ensure the **Clipboard Manager** app is signed before exporting.
+3. **Notarization** (required for macOS 10.15+): For direct download outside the Mac App Store, notarize the app so Gatekeeper does not block it. After archiving, choose **Distribute App** → **Developer ID** (or **Copy App** then notarize the copied app with `xcrun notarytool submit` and staple with `xcrun stapler staple`). See [Apple’s notarization guide](https://developer.apple.com/documentation/security/notarizing_mac_software_before_distribution) for credentials and steps.
+4. **Export**: Distribute the archive (e.g. **Distribute App** → Copy App or Upload to notary) and place **Clipboard Manager.app** in a `.zip` or `.dmg` for users. They can install to `/Applications` or elsewhere.
 
 ## Usage
 
@@ -106,6 +109,11 @@ Add screenshots before publishing to improve first impressions:
 - [x] Unit test target for core service logic
 - [ ] Broader test coverage for persistence edge cases
 - [ ] CI enhancements for release packaging artifacts
+
+## Contact
+
+- **Source:** [GitHub](https://github.com/millibus/screen-snip-manager)
+- **Bugs and suggestions:** [Open an issue](https://github.com/millibus/screen-snip-manager/issues)
 
 ## License
 
