@@ -36,12 +36,32 @@ xcodebuild test -project "ClipboardManager.xcodeproj" -scheme "ClipboardManager"
 
 ## Distribution
 
+### Local install (terminal)
+
+To build and install the app to `/Applications` in one step (no Xcode UI):
+
+```bash
+./scripts/build-and-install.sh
+```
+
+This builds a Release version and copies **ClipboardManager.app** to `/Applications`. No code signing is required for local use. If Gatekeeper blocks the first launch, right-click the app → **Open** once, or run: `xattr -cr /Applications/ClipboardManager.app`.
+
+### Shipping to others (DMG, GitHub Releases, etc.)
+
 To ship a build for others (e.g. GitHub Releases or direct download):
 
 1. **Archive**: In Xcode, choose **Product → Archive**.
 2. **Code signing**: In the **ClipboardManager** target, open **Signing & Capabilities** and set your **Team**. Use "Sign to Run Locally" for local installs, or full signing for distribution. The project uses automatic signing; ensure the **Clipboard Manager** app is signed before exporting.
 3. **Notarization** (required for macOS 10.15+): For direct download outside the Mac App Store, notarize the app so Gatekeeper does not block it. After archiving, choose **Distribute App** → **Developer ID** (or **Copy App** then notarize the copied app with `xcrun notarytool submit` and staple with `xcrun stapler staple`). See [Apple’s notarization guide](https://developer.apple.com/documentation/security/notarizing_mac_software_before_distribution) for credentials and steps.
 4. **Export**: Distribute the archive (e.g. **Distribute App** → Copy App or Upload to notary) and place **Clipboard Manager.app** in a `.zip` or `.dmg` for users. They can install to `/Applications` or elsewhere.
+
+**Creating a DMG (double-click install):** After you have a built or exported **ClipboardManager.app**, run from the project root:
+
+```bash
+./scripts/create-dmg.sh [path/to/ClipboardManager.app]
+```
+
+If you omit the path, the script uses `build/Build/Products/Release/ClipboardManager.app` (e.g. after running `./scripts/build-and-install.sh`). The script creates **ClipboardManager-<version>.dmg** in the project root. Users double-click the DMG and drag the app to Applications.
 
 ## Usage
 
