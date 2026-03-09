@@ -91,7 +91,7 @@ The overlay hotkey is registered via the Carbon API. If it does not work when th
 1. Open **System Settings → Privacy & Security → Accessibility**.
 2. Add **Clipboard Manager** (or **ClipboardManager**) and ensure it is enabled.
 
-The app does not require Accessibility for basic menu bar and overlay use; only the global hotkey may need it on some configurations.
+The app does not require Accessibility for basic menu bar and overlay use; the global hotkey and **Auto-paste on select** may need it. If auto-paste does nothing, add Clipboard Manager in **Privacy & Security → Accessibility** and enable it.
 
 ## Karabiner setup (optional)
 
@@ -116,17 +116,22 @@ The project includes an **AppIcon** set in `ClipboardManager/Resources/Assets.xc
 
 ## Screenshots
 
-Add screenshots before publishing to improve first impressions:
+Before publishing, add screenshots to `docs/images/` for a better first impression:
 
 - Overlay search view: `docs/images/overlay.png`
 - Preferences panel: `docs/images/preferences.png`
 
+See `docs/images/README.md` for capture instructions. Before a release, run through `docs/MANUAL_TEST_CHECKLIST.md`.
+
 ## Roadmap
+
+For remaining steps before a 1.0 launch (screenshots, tag/release, optional CI), see [NEXT_STEPS.md](NEXT_STEPS.md).
 
 - [x] Clipboard history for text and images
 - [x] Fuzzy search, pins, and tags
 - [x] Sensitive-content detection and expiry
 - [x] Unit test target for core service logic
+- [x] ClipboardStore and dedupe/expiry tests; manual regression checklist
 - [ ] Broader test coverage for persistence edge cases
 - [ ] CI enhancements for release packaging artifacts
 
@@ -134,7 +139,8 @@ Add screenshots before publishing to improve first impressions:
 
 - **Source:** [GitHub](https://github.com/millibus/screen-snip-manager)
 - **Bugs and suggestions:** [Open an issue](https://github.com/millibus/screen-snip-manager/issues)
+- **Contributing:** See [CONTRIBUTING.md](CONTRIBUTING.md). Security: [SECURITY.md](SECURITY.md).
 
 ## License
 
-MIT License. See `LICENSE`.
+MIT License. See [LICENSE](LICENSE).

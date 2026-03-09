@@ -16,7 +16,8 @@ enum UserDefaultsKeys {
     static let hotkeyKeyCode = "hotkeyKeyCode"
 
     static var autoPasteOnSelectDefault: Bool { false }
-    static var storeSensitiveDataDefault: Bool { true }
+    /// Default false so normal clipboard content is not silently expired; users can opt in to store sensitive-looking items with short expiry.
+    static var storeSensitiveDataDefault: Bool { false }
     static var sensitiveExpirySecondsDefault: Int { 60 }
     static var maxHistoryDefault: Int { 500 }
     /// Default: Cmd+Shift+V

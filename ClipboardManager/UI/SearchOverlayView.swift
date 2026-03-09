@@ -33,6 +33,8 @@ struct SearchOverlayView: View {
     @State private var entryToTag: ClipboardEntry?
     @State private var newTagText = ""
     @State private var imageCache: [Int64: NSImage] = [:]
+    @State private var hoveredImageId: Int64?
+    @State private var previewWindows: [Int64: ImagePreviewWindow] = [:]
     @State private var debounceTask: Task<Void, Never>?
     @FocusState private var listFocused: Bool
     @ObservedObject var refreshTrigger: OverlayRefreshTrigger
@@ -87,6 +89,22 @@ struct SearchOverlayView: View {
                                 .frame(width: 40, height: 40)
                                 .clipped()
                                 .cornerRadius(4)
+                                .onHover { isHovered in
+                                    hoveredImageId = isHovered ? entry.id : nil
+                                }
+                                .popover(isPresented: Binding(
+                                    get: { hoveredImageId == entry.id },
+                                    set: { if !$0 { hoveredImageId = nil } }
+                                )) {
+                                    Image(nsImage: nsImage)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(maxWidth: 300, maxHeight: 300)
+                                        .padding(4)
+                                }
+                                .onTapGesture {
+                                    openImagePreview(entry)
+                                }
                         } else {
                             Color.secondary.opacity(0.2)
                                 .frame(width: 40, height: 40)
@@ -162,7 +180,13 @@ struct SearchOverlayView: View {
                 refreshEntries()
             }
         }
+        .onKeyPress(.escape) {
+            onDismiss?()
+            return .handled
+        }
         .frame(width: 420, height: 360)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
         .sheet(item: $entryToTag) { entry in
             AddTagSheet(entry: entry, tagText: $newTagText) {
                 if !newTagText.trimmingCharacters(in: .whitespaces).isEmpty {
@@ -214,6 +238,25 @@ struct SearchOverlayView: View {
         if newIdx >= 0, newIdx < entries.count {
             selectedId = entries[newIdx].id
         }
+    }
+
+    private func openImagePreview(_ entry: ClipboardEntry) {
+        let image: NSImage
+        if let cached = imageCache[entry.id] {
+            image = cached
+        } else if let data = ClipboardStore.shared.fetchImageData(for: entry.id), let img = NSImage(data: data) {
+            imageCache[entry.id] = img
+            image = img
+        } else {
+            return
+        }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        let title = "Image Preview — \(formatter.string(from: entry.createdAt))"
+        let window = ImagePreviewWindow(image: image, title: title)
+        previewWindows[entry.id] = window
+        window.showWindow()
     }
 }
 

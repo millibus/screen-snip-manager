@@ -16,6 +16,16 @@ final class ClipboardStore {
         }
     }
 
+    /// Test-only: create a store backed by the given path (e.g. temp directory).
+    internal init(dbPath: String) {
+        do {
+            dbQueue = try DatabaseQueue(path: dbPath)
+            try migrator.migrate(dbQueue!)
+        } catch {
+            print("ClipboardStore init error: \(error)")
+        }
+    }
+
     private func fileURL() throws -> URL {
         let fm = FileManager.default
         let dir = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
@@ -54,10 +64,14 @@ final class ClipboardStore {
         let maxHistory = UserDefaults.standard.object(forKey: UserDefaultsKeys.maxHistory) as? Int ?? UserDefaultsKeys.maxHistoryDefault
         do {
             try db.write { db in
-                // Deduplicate: if hash exists, update created_at
+                // Deduplicate: if hash exists, refresh created_at, expires_at, and is_sensitive so re-copying does not leave stale expiry.
                 let existing = try Int64.fetchOne(db, sql: "SELECT id FROM clipboard_entries WHERE hash = ?", arguments: [hash])
                 if let id = existing {
-                    try db.execute(sql: "UPDATE clipboard_entries SET created_at = ? WHERE id = ?", arguments: [Date().timeIntervalSince1970, id])
+                    let now = Date().timeIntervalSince1970
+                    let exp: Double? = expiresAt?.timeIntervalSince1970
+                    try db.execute(sql: """
+                        UPDATE clipboard_entries SET created_at = ?, expires_at = ?, is_sensitive = ? WHERE id = ?
+                        """, arguments: [now, exp, isSensitive ? 1 : 0, id])
                     return
                 }
                 let exp: Double? = expiresAt?.timeIntervalSince1970

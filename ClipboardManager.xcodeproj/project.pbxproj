@@ -22,11 +22,13 @@
 		A1000000000000000000000E /* SensitiveDataDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001E /* SensitiveDataDetector.swift */; };
 		A1000000000000000000000F /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001F /* PreferencesView.swift */; };
 		A10000000000000000000023 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000020 /* PreferencesWindowController.swift */; };
+		A100000000000000000000B0 /* ImagePreviewWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000000000000000000B1 /* ImagePreviewWindow.swift */; };
 		A10000000000000000000021 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000022 /* Assets.xcassets */; };
 		A10000000000000000000090 /* FuzzySearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000095 /* FuzzySearchServiceTests.swift */; };
 		A10000000000000000000091 /* SensitiveDataDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000096 /* SensitiveDataDetectorTests.swift */; };
 		A10000000000000000000092 /* ClipboardEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000097 /* ClipboardEntryTests.swift */; };
 		A10000000000000000000093 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000098 /* XCTest.framework */; };
+		A100000000000000000000B2 /* ClipboardStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000000000000000000B3 /* ClipboardStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,12 +48,14 @@
 		A1000000000000000000001E /* SensitiveDataDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitiveDataDetector.swift; sourceTree = "<group>"; };
 		A1000000000000000000001F /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		A10000000000000000000020 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		A100000000000000000000B1 /* ImagePreviewWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewWindow.swift; sourceTree = "<group>"; };
 		A10000000000000000000022 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10000000000000000000094 /* ClipboardManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClipboardManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000000000000000000095 /* FuzzySearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuzzySearchServiceTests.swift; sourceTree = "<group>"; };
 		A10000000000000000000096 /* SensitiveDataDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitiveDataDetectorTests.swift; sourceTree = "<group>"; };
 		A10000000000000000000097 /* ClipboardEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntryTests.swift; sourceTree = "<group>"; };
 		A10000000000000000000098 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
+		A100000000000000000000B3 /* ClipboardStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +130,7 @@
 				A10000000000000000000019 /* MenuBarController.swift */,
 				A1000000000000000000001F /* PreferencesView.swift */,
 				A10000000000000000000020 /* PreferencesWindowController.swift */,
+				A100000000000000000000B1 /* ImagePreviewWindow.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 				A10000000000000000000095 /* FuzzySearchServiceTests.swift */,
 				A10000000000000000000096 /* SensitiveDataDetectorTests.swift */,
 				A10000000000000000000097 /* ClipboardEntryTests.swift */,
+				A100000000000000000000B3 /* ClipboardStoreTests.swift */,
 			);
 			path = ClipboardManagerTests;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 				A1000000000000000000000E /* SensitiveDataDetector.swift in Sources */,
 				A1000000000000000000000F /* PreferencesView.swift in Sources */,
 				A10000000000000000000023 /* PreferencesWindowController.swift in Sources */,
+				A100000000000000000000B0 /* ImagePreviewWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +305,7 @@
 				A10000000000000000000092 /* ClipboardEntryTests.swift in Sources */,
 				A10000000000000000000090 /* FuzzySearchServiceTests.swift in Sources */,
 				A10000000000000000000091 /* SensitiveDataDetectorTests.swift in Sources */,
+				A100000000000000000000B2 /* ClipboardStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

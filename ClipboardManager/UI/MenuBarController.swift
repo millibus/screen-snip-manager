@@ -1,6 +1,7 @@
 import AppKit
 import Carbon
 import SwiftUI
+import Accessibility
 
 final class MenuBarController: NSObject {
     private var statusItem: NSStatusItem?
@@ -131,6 +132,10 @@ final class MenuBarController: NSObject {
     }
 
     private func simulatePaste() {
+        guard isAccessibilityTrusted() else {
+            showAutoPasteAccessibilityHintOnce()
+            return
+        }
         let work = DispatchWorkItem {
             guard let source = CGEventSource(stateID: .hidSystemState) else { return }
             let keyCode = CGKeyCode(kVK_ANSI_V)
@@ -146,5 +151,26 @@ final class MenuBarController: NSObject {
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: work)
+    }
+
+    private func isAccessibilityTrusted() -> Bool {
+        AXIsProcessTrustedWithOptions(["AXTrustedCheckOptionPrompt": false] as CFDictionary)
+    }
+
+    private func showAutoPasteAccessibilityHintOnce() {
+        let key = "hasShownAutoPasteAccessibilityHint"
+        guard !UserDefaults.standard.bool(forKey: key) else { return }
+        UserDefaults.standard.set(true, forKey: key)
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.messageText = "Auto-paste requires Accessibility permission"
+            alert.informativeText = "To paste into other apps automatically, add Clipboard Manager in System Settings → Privacy & Security → Accessibility and enable it."
+            alert.alertStyle = .informational
+            alert.addButton(withTitle: "Open System Settings")
+            alert.addButton(withTitle: "OK")
+            if alert.runModal() == .alertFirstButtonReturn, let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
+                NSWorkspace.shared.open(url)
+            }
+        }
     }
 }
