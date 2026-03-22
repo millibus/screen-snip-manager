@@ -27,6 +27,8 @@ private func tagsList(from tagsString: String?) -> [String] {
 }
 
 struct SearchOverlayView: View {
+    @AppStorage(UserDefaultsKeys.geminiAPIKey) private var geminiAPIKey = UserDefaultsKeys.geminiAPIKeyDefault
+    @State private var isGeneratingUI: Bool = false
     @State private var query = ""
     @State private var entries: [ClipboardEntry] = []
     @State private var selectedId: Int64?
@@ -146,6 +148,11 @@ struct SearchOverlayView: View {
                         entryToTag = entry
                         newTagText = ""
                     }
+                    if entry.contentType == .image {
+                        Button("Generate UI Code") {
+                            generateUICode(for: entry)
+                        }
+                    }
                 }
             }
             .listStyle(.plain)
@@ -257,6 +264,39 @@ struct SearchOverlayView: View {
         let window = ImagePreviewWindow(image: image, title: title)
         previewWindows[entry.id] = window
         window.showWindow()
+    }
+
+    private func generateUICode(for entry: ClipboardEntry) {
+        guard let imageData = ClipboardStore.shared.fetchImageData(for: entry.id) else {
+            print("No image data found for entry")
+            return
+        }
+        
+        isGeneratingUI = true
+        
+        Task {
+            do {
+                let generatedCode = try await GeminiService.shared.generateUICode(from: imageData, apiKey: geminiAPIKey)
+                
+                DispatchQueue.main.async {
+                    let pasteboard = NSPasteboard.general
+                    pasteboard.clearContents()
+                    pasteboard.setString(generatedCode, forType: .string)
+                    
+                    // The PasteboardWatcher will automatically pick it up,
+                    // but we also can refresh our local view to show it quickly.
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        refreshTrigger.refresh()
+                    }
+                    self.isGeneratingUI = false
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    print("Error generating UI: \(error.localizedDescription)")
+                    self.isGeneratingUI = false
+                }
+            }
+        }
     }
 }
 
