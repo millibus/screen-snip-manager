@@ -35,9 +35,10 @@ jobs:
 
       - name: Build
         run: |
+          # Build all targets instead of relying on a shared scheme (CI may not have shared schemes).
           xcodebuild build \
             -project "ClipboardManager.xcodeproj" \
-            -scheme "ClipboardManager" \
+            -alltargets \
             -destination "platform=macOS" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO
