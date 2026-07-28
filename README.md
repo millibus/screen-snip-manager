@@ -77,6 +77,7 @@ Open **Preferences…** from the menu bar (⌘,) to configure:
 - **Max history** — Maximum number of entries to keep (100–10,000). Oldest non-pinned entries are removed when exceeded.
 - **Hotkey** — Global shortcut to show the overlay (default ⌘⇧V). Click **Change** and press the new key combination.
 - **Sensitive data** — When **Store sensitive data (short expiry)** is on, content that looks like passwords/tokens is stored with a short expiry. When off, such content is not stored. **Sensitive expiry** sets that expiry in seconds (10–86400).
+- **Gemini API key** (optional) — Enables the **Generate UI Code** action on image entries, which uploads the selected image to Google's Gemini API and copies back generated Tailwind HTML. Leave blank to keep the app fully offline; see [SECURITY.md](SECURITY.md) for the privacy details.
 
 ## Data
 
