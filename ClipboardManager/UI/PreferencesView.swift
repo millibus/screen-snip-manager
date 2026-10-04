@@ -8,6 +8,7 @@ struct PreferencesView: View {
     @AppStorage(UserDefaultsKeys.sensitiveExpirySeconds) private var sensitiveExpirySeconds = UserDefaultsKeys.sensitiveExpirySecondsDefault
     @AppStorage(UserDefaultsKeys.maxHistory) private var maxHistory = UserDefaultsKeys.maxHistoryDefault
     @AppStorage(UserDefaultsKeys.geminiAPIKey) private var geminiAPIKey = UserDefaultsKeys.geminiAPIKeyDefault
+    @AppStorage(UserDefaultsKeys.geminiModel) private var geminiModel = UserDefaultsKeys.geminiModelDefault
 
     @State private var hotkeyDisplay: String = ""
     @State private var isRecordingHotkey = false
@@ -73,10 +74,13 @@ struct PreferencesView: View {
                 SecureField("Gemini API Key", text: $geminiAPIKey)
                     .textFieldStyle(.roundedBorder)
                     .help("Required to generate UI code from clipboard images.")
+                TextField("Gemini model", text: $geminiModel)
+                    .textFieldStyle(.roundedBorder)
+                    .help("Use a supported Gemini model ID with image input and text output. Blank uses the default model.")
             }
         }
         .formStyle(.grouped)
-        .frame(width: 400, height: 420)
+        .frame(width: 400, height: 470)
         .onDisappear {
             stopRecordingHotkey()
         }

@@ -28,6 +28,7 @@ private func tagsList(from tagsString: String?) -> [String] {
 
 struct SearchOverlayView: View {
     @AppStorage(UserDefaultsKeys.geminiAPIKey) private var geminiAPIKey = UserDefaultsKeys.geminiAPIKeyDefault
+    @AppStorage(UserDefaultsKeys.geminiModel) private var geminiModel = UserDefaultsKeys.geminiModelDefault
     @State private var isGeneratingUI: Bool = false
     @State private var query = ""
     @State private var entries: [ClipboardEntry] = []
@@ -276,7 +277,7 @@ struct SearchOverlayView: View {
         
         Task {
             do {
-                let generatedCode = try await GeminiService.shared.generateUICode(from: imageData, apiKey: geminiAPIKey)
+                let generatedCode = try await GeminiService.shared.generateUICode(from: imageData, apiKey: geminiAPIKey, model: geminiModel)
                 
                 DispatchQueue.main.async {
                     let pasteboard = NSPasteboard.general

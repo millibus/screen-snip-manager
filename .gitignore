@@ -4,6 +4,7 @@ DerivedData/
 *.xcworkspace/xcuserdata/
 build/
 *.xcarchive
+*.dmg
 *.moved-aside
 *.pbxuser
 !default.pbxuser

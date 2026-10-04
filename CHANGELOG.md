@@ -4,6 +4,18 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Fixed
+
+- Generate UI Code no longer calls the retired Gemini 1.5 Pro endpoint. The default is Gemini 3.8 Flash; Preferences accepts another supported image-input/text-output model ID.
+- Gemini keys travel in the authentication header instead of the request URL. Provider and transport errors no longer echo raw private response text.
+- Corrected Karabiner-Elements documentation, source/release status and unsupported launch-argument guidance.
+
+### Added
+
+- Standalone mocked Gemini regression tests (`swift test --build-system native`), also included in the Xcode test target. They never launch the app or read the clipboard, production preferences, database, or real keys.
+
 ## [1.0.0] - 2026-03-08
 
 ### Added

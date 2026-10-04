@@ -21,6 +21,9 @@ jobs:
         with:
           xcode-version: latest-stable
 
+      - name: Mocked Gemini regression (no app startup or API access)
+        run: swift test --build-system native
+
       - name: Build and test
         run: |
           xcodebuild test \
