@@ -56,8 +56,7 @@ open "ClipboardManager.xcodeproj"
 
 ### Running Tests
 ```bash
-# No test target is currently configured.
-# After adding tests in Xcode, run:
+# A hosted test target exists; use an isolated macOS test account (see SECURITY.md).
 xcodebuild test -project "ClipboardManager.xcodeproj" -scheme "ClipboardManager" -destination "platform=macOS"
 ```
 
@@ -73,7 +72,7 @@ xcodebuild -project "ClipboardManager.xcodeproj" -scheme "ClipboardManager" -con
 Code is separated into model, service, and UI layers with clear responsibilities: models define data shape, services encapsulate behavior/integration, and UI files coordinate display and user interaction.
 
 ### Service Singletons + Local Persistence
-Core services (`ClipboardStore`, fuzzy search, sensitive-data detection) use singleton access patterns. Persistence is local-only SQLite with migrations, hash-based deduplication, max-history trimming, and periodic expiry cleanup.
+Core services (`ClipboardStore`, fuzzy search, sensitive-data detection) use singleton access patterns. History persistence is local SQLite; the optional Gemini image action sends selected images to Google. Persistence uses with migrations, hash-based deduplication, max-history trimming, and periodic expiry cleanup.
 
 ### Hybrid SwiftUI/AppKit Composition
 SwiftUI views are embedded in AppKit windows/controllers to support menu bar behavior, floating overlay windows, and native macOS integration points.

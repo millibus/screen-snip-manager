@@ -29,6 +29,8 @@
 		A10000000000000000000092 /* ClipboardEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000097 /* ClipboardEntryTests.swift */; };
 		A10000000000000000000093 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000098 /* XCTest.framework */; };
 		A100000000000000000000B2 /* ClipboardStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000000000000000000B3 /* ClipboardStoreTests.swift */; };
+		A100000000000000000000C0 /* GeminiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000000000000000000C1 /* GeminiService.swift */; };
+		A100000000000000000000C2 /* GeminiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000000000000000000C3 /* GeminiServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		A10000000000000000000097 /* ClipboardEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEntryTests.swift; sourceTree = "<group>"; };
 		A10000000000000000000098 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
 		A100000000000000000000B3 /* ClipboardStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardStoreTests.swift; sourceTree = "<group>"; };
+		A100000000000000000000C1 /* GeminiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiService.swift; sourceTree = "<group>"; };
+		A100000000000000000000C3 /* GeminiServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +116,7 @@
 		A10000000000000000000034 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A100000000000000000000C1 /* GeminiService.swift */,
 				A10000000000000000000014 /* ClipboardStore.swift */,
 				A10000000000000000000015 /* PasteboardWatcher.swift */,
 				A10000000000000000000016 /* HotKeyService.swift */,
@@ -156,6 +161,7 @@
 		A1000000000000000000009A /* ClipboardManagerTests */ = {
 			isa = PBXGroup;
 			children = (
+				A100000000000000000000C3 /* GeminiServiceTests.swift */,
 				A10000000000000000000095 /* FuzzySearchServiceTests.swift */,
 				A10000000000000000000096 /* SensitiveDataDetectorTests.swift */,
 				A10000000000000000000097 /* ClipboardEntryTests.swift */,
@@ -280,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A100000000000000000000C0 /* GeminiService.swift in Sources */,
 				A10000000000000000000001 /* ClipboardManagerApp.swift in Sources */,
 				A10000000000000000000002 /* AppDelegate.swift in Sources */,
 				A10000000000000000000003 /* ClipboardEntry.swift in Sources */,
@@ -302,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A100000000000000000000C2 /* GeminiServiceTests.swift in Sources */,
 				A10000000000000000000092 /* ClipboardEntryTests.swift in Sources */,
 				A10000000000000000000090 /* FuzzySearchServiceTests.swift in Sources */,
 				A10000000000000000000091 /* SensitiveDataDetectorTests.swift in Sources */,

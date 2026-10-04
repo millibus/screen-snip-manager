@@ -1,6 +1,6 @@
 # Manual regression checklist
 
-Use this checklist before tagging a release or shipping a build.
+Use this checklist before tagging a release or shipping a build. Run only in a separate macOS test account with synthetic clipboard data, empty Gemini key, and no personal application windows. Record commit, macOS, architecture, Xcode, date, and pass/fail/blocked for each item; an unchecked box is not evidence of success. See [privacy guidance](../SECURITY.md).
 
 ## Overlay and focus
 
@@ -16,7 +16,7 @@ Use this checklist before tagging a release or shipping a build.
 ## Data and sensitivity
 
 - [ ] Copy a URL, then a JSON snippet, then a normal sentence. All appear in history and are not expired early.
-- [ ] With **Store sensitive data (short expiry)** off, copy a known token (e.g. `ghp_xxx`). It is not stored. With the option on, it is stored and expires after the configured seconds.
+- [ ] With **Store sensitive data (short expiry)** off, copy the synthetic detector fixture `ghp_example_not_real_token_value` (the short string `ghp_xxx` does not meet the detector length threshold). It is not stored. With the option on, it is stored and expires after the configured seconds.
 - [ ] Re-copy the same text twice. Only one entry exists; its “last seen” position is updated and any expiry is refreshed.
 
 ## Pins and tags
@@ -29,4 +29,11 @@ Use this checklist before tagging a release or shipping a build.
 
 ## Cleanup
 
-- [ ] Set max history to a small value (e.g. 5). Add more than 5 entries; oldest non-pinned entries are removed. Pinned entries are never removed by the limit.
+- [ ] Set max history to the supported minimum of 100. Add more than 100 distinct synthetic entries; oldest non-pinned entries are removed. Pinned entries are never removed by the limit.
+
+## Review limitations and external processing
+
+- [ ] Search for a word after character 80 of a stored long text. Record the current preview-only search limitation.
+- [ ] Quit and relaunch; verify synthetic ordinary entries persist and expired entries remain hidden.
+- [ ] With the Gemini key blank, confirm the image action reports missing configuration without an upload. Do not add a real key or execute a billed request as part of this checklist.
+- [ ] Inspect any retained UI capture at full resolution using [the screenshot guide](images/README.md).
