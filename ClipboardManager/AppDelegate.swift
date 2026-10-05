@@ -59,6 +59,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             UserDefaultsKeys.storeSensitiveData: UserDefaultsKeys.storeSensitiveDataDefault,
             UserDefaultsKeys.sensitiveExpirySeconds: UserDefaultsKeys.sensitiveExpirySecondsDefault,
         ])
+        // Generate UI Code (Gemini) was removed; drop any API key earlier builds saved in plain-text preferences.
+        UserDefaults.standard.removeObject(forKey: "geminiAPIKey")
     }
 
     @objc private func hotkeyDidChange() {

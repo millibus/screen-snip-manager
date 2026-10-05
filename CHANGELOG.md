@@ -6,9 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Removed
+
+- **Generate UI Code** (Gemini) and the Gemini API key preference. The feature had stopped working when Google shut down `gemini-1.5-pro` on 2025-09-29, and it was the app's only network access. Any previously saved key is deleted from preferences at launch.
+
 ### Fixed
 
-- **Generate UI Code** now calls `gemini-3.8-flash`; the previous model, `gemini-1.5-pro`, was shut down by Google on 2025-09-29, so the action always failed.
 - README: Karabiner-Elements link points to the real site (`karabiner-elements.pqrs.org`).
 
 ## [1.0.0] - 2026-03-08
