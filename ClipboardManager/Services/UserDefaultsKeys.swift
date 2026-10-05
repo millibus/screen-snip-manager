@@ -49,7 +49,7 @@ enum GeminiError: Error, LocalizedError {
 class GeminiService {
     static let shared = GeminiService()
     
-    private let endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent"
+    private let endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent"
     
     func generateUICode(from imageData: Data, apiKey: String) async throws -> String {
         guard !apiKey.isEmpty else {

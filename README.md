@@ -96,7 +96,7 @@ The app does not require Accessibility for basic menu bar and overlay use; the g
 
 ## Karabiner setup (optional)
 
-You can trigger the overlay by holding **F6** (or another key) using [Karabiner-Elements](https://karabiner-elements.pikelet.audio/).
+You can trigger the overlay by holding **F6** (or another key) using [Karabiner-Elements](https://karabiner-elements.pqrs.org/).
 
 1. Copy the included config into your Karabiner rules:
    - **File**: `Karabiner/clipboard-on-hold.json`

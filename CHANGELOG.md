@@ -4,6 +4,13 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Fixed
+
+- **Generate UI Code** now calls `gemini-3.8-flash`; the previous model, `gemini-1.5-pro`, was shut down by Google on 2025-09-29, so the action always failed.
+- README: Karabiner-Elements link points to the real site (`karabiner-elements.pqrs.org`).
+
 ## [1.0.0] - 2026-03-08
 
 ### Added
