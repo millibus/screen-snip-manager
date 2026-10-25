@@ -1,0 +1,25 @@
+---
+description: screen-snip-manager - macOS menu bar clipboard manager (Swift, SwiftUI/AppKit, GRDB)
+alwaysApply: true
+---
+# screen-snip-manager (Clipboard Manager)
+
+macOS 14+ menu bar app keeping a local, searchable clipboard history (text and images, fuzzy search, pins, tags, sensitive-data expiry). `CLAUDE.md` has the architecture, key files and conventions; read it and `README.md` first.
+
+## Stack and local commands (Xcode 15+, macOS)
+- Open `ClipboardManager.xcodeproj`, scheme `ClipboardManager` (GRDB via Swift Package Manager).
+- Build: `xcodebuild -project "ClipboardManager.xcodeproj" -scheme "ClipboardManager" -configuration Debug build`
+- Test: `xcodebuild test -project "ClipboardManager.xcodeproj" -scheme "ClipboardManager" -destination "platform=macOS"` (tests in `ClipboardManagerTests/`; CI runs this in `macos-tests.yml`). CLAUDE.md's "no test target" note is out of date.
+- `scripts/build-and-install.sh` installs into /Applications: only on a machine you're told to use.
+
+## Releases: never
+- Distribution is a signed/notarized archive or DMG (`scripts/create-dmg.sh`). Agents must never sign, notarize, publish releases or upload builds. Releases, merges and any account or signing change need potac's explicit OK.
+
+## Branches and PRs
+- Default branch `main`. Never push to it. Small, focused draft PRs; never merge or close PRs. Keep CI (macOS tests, CodeQL) green.
+
+## How to work
+- Reproduce a bug before fixing it (a failing test first where possible). Reuse and delete before adding.
+- Keep clipboard data local: no network calls, telemetry or logging of clipboard contents. Settings go through `UserDefaultsKeys.swift`.
+- Never commit secrets or print them (signing identities, team IDs, notary credentials).
+- No personal names in code, docs or commits.
